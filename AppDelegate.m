@@ -6,6 +6,8 @@
 //  Copyright © 2016 Robert Ruzbacky. All rights reserved.
 //
 
+#ifdef TARGET_OS_MAC
+
 #import "AppDelegate.h"
 
 @interface AppDelegate ()
@@ -23,3 +25,5 @@
 }
 
 @end
+
+#endif

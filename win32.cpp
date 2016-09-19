@@ -6,6 +6,8 @@
 //  Copyright © 2016 Robert Ruzbacky. All rights reserved.
 //
 
+#ifdef _WIN32
+
 // Windows header file contains all Win32 APIs
 #include <windows.h>
 
@@ -138,3 +140,6 @@ WndProc (HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
     // forward messages not processed
     return DefWindowProc (hWnd, msg, wParam, lParam);
 }
+
+#endif
+

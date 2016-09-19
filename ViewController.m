@@ -6,6 +6,8 @@
 //  Copyright © 2016 Robert Ruzbacky. All rights reserved.
 //
 
+#ifdef TARGET_OS_MAC
+
 #import "ViewController.h"
 
 @implementation ViewController
@@ -23,3 +25,6 @@
 }
 
 @end
+
+
+#endif
