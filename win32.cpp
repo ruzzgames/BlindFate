@@ -100,7 +100,7 @@ bool InitWindowsApp(HINSTANCE instanceHandle, int show)
 
 int Run()
 {
-	MSG msg = { 0 }
+	MSG msg = { 0 };
 
 	// message loop
 	while (msg.message != WM_QUIT)
