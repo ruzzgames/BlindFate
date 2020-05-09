@@ -1,0 +1,991 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D4AA3FB224548119008E0BAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA3FB124548119008E0BAE /* AppDelegate.m */; };
+		D4AA3FB524548119008E0BAE /* Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA3FB424548119008E0BAE /* Renderer.m */; };
+		D4AA3FB824548119008E0BAE /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA3FB724548119008E0BAE /* GameViewController.m */; };
+		D4AA3FBA24548119008E0BAE /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = D4AA3FB924548119008E0BAE /* Shaders.metal */; };
+		D4AA3FBE24548119008E0BAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4AA3FBC24548119008E0BAE /* Main.storyboard */; };
+		D4AA3FC02454811C008E0BAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4AA3FBF2454811C008E0BAE /* Assets.xcassets */; };
+		D4AA3FC32454811C008E0BAE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4AA3FC12454811C008E0BAE /* LaunchScreen.storyboard */; };
+		D4AA3FC62454811C008E0BAE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA3FC52454811C008E0BAE /* main.m */; };
+		D4AA3FD02454811C008E0BAE /* Blindfate_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA3FCF2454811C008E0BAE /* Blindfate_iOSTests.m */; };
+		D4AA3FDB2454811C008E0BAE /* Blindfate_iOSUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA3FDA2454811C008E0BAE /* Blindfate_iOSUITests.m */; };
+		D4AA3FF024548181008E0BAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA3FEF24548181008E0BAE /* AppDelegate.m */; };
+		D4AA3FF324548181008E0BAE /* Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA3FF224548181008E0BAE /* Renderer.m */; };
+		D4AA3FF624548181008E0BAE /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA3FF524548181008E0BAE /* GameViewController.m */; };
+		D4AA3FF824548181008E0BAE /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = D4AA3FF724548181008E0BAE /* Shaders.metal */; };
+		D4AA3FFB24548182008E0BAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4AA3FFA24548182008E0BAE /* Assets.xcassets */; };
+		D4AA3FFE24548182008E0BAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4AA3FFC24548182008E0BAE /* Main.storyboard */; };
+		D4AA400124548182008E0BAE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA400024548182008E0BAE /* main.m */; };
+		D4AA400C24548183008E0BAE /* Blindfate_MacOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA400B24548183008E0BAE /* Blindfate_MacOSTests.m */; };
+		D4AA401724548183008E0BAE /* Blindfate_MacOSUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA401624548183008E0BAE /* Blindfate_MacOSUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D4AA3FCC2454811C008E0BAE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4AA3FA524548119008E0BAE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4AA3FAC24548119008E0BAE;
+			remoteInfo = "Blindfate iOS";
+		};
+		D4AA3FD72454811C008E0BAE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4AA3FA524548119008E0BAE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4AA3FAC24548119008E0BAE;
+			remoteInfo = "Blindfate iOS";
+		};
+		D4AA400824548183008E0BAE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4AA3FA524548119008E0BAE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4AA3FEB24548181008E0BAE;
+			remoteInfo = "Blindfate MacOS";
+		};
+		D4AA401324548183008E0BAE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4AA3FA524548119008E0BAE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4AA3FEB24548181008E0BAE;
+			remoteInfo = "Blindfate MacOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D4AA3FAD24548119008E0BAE /* Blindfate iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Blindfate iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4AA3FB024548119008E0BAE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D4AA3FB124548119008E0BAE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D4AA3FB324548119008E0BAE /* Renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
+		D4AA3FB424548119008E0BAE /* Renderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Renderer.m; sourceTree = "<group>"; };
+		D4AA3FB624548119008E0BAE /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		D4AA3FB724548119008E0BAE /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		D4AA3FB924548119008E0BAE /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		D4AA3FBB24548119008E0BAE /* ShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
+		D4AA3FBD24548119008E0BAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D4AA3FBF2454811C008E0BAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D4AA3FC22454811C008E0BAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D4AA3FC42454811C008E0BAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4AA3FC52454811C008E0BAE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D4AA3FCB2454811C008E0BAE /* Blindfate iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Blindfate iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4AA3FCF2454811C008E0BAE /* Blindfate_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Blindfate_iOSTests.m; sourceTree = "<group>"; };
+		D4AA3FD12454811C008E0BAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4AA3FD62454811C008E0BAE /* Blindfate iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Blindfate iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4AA3FDA2454811C008E0BAE /* Blindfate_iOSUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Blindfate_iOSUITests.m; sourceTree = "<group>"; };
+		D4AA3FDC2454811C008E0BAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4AA3FEC24548181008E0BAE /* Blindfate MacOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Blindfate MacOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4AA3FEE24548181008E0BAE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D4AA3FEF24548181008E0BAE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D4AA3FF124548181008E0BAE /* Renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
+		D4AA3FF224548181008E0BAE /* Renderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Renderer.m; sourceTree = "<group>"; };
+		D4AA3FF424548181008E0BAE /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		D4AA3FF524548181008E0BAE /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		D4AA3FF724548181008E0BAE /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		D4AA3FF924548181008E0BAE /* ShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
+		D4AA3FFA24548182008E0BAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D4AA3FFD24548182008E0BAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D4AA3FFF24548182008E0BAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4AA400024548182008E0BAE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D4AA400224548182008E0BAE /* Blindfate_MacOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Blindfate_MacOS.entitlements; sourceTree = "<group>"; };
+		D4AA400724548183008E0BAE /* Blindfate MacOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Blindfate MacOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4AA400B24548183008E0BAE /* Blindfate_MacOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Blindfate_MacOSTests.m; sourceTree = "<group>"; };
+		D4AA400D24548183008E0BAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4AA401224548183008E0BAE /* Blindfate MacOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Blindfate MacOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4AA401624548183008E0BAE /* Blindfate_MacOSUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Blindfate_MacOSUITests.m; sourceTree = "<group>"; };
+		D4AA401824548183008E0BAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D4AA3FAA24548119008E0BAE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4AA3FC82454811C008E0BAE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4AA3FD32454811C008E0BAE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4AA3FE924548181008E0BAE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4AA400424548183008E0BAE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4AA400F24548183008E0BAE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D4AA3FA424548119008E0BAE = {
+			isa = PBXGroup;
+			children = (
+				D4AA3FAF24548119008E0BAE /* Blindfate iOS */,
+				D4AA3FCE2454811C008E0BAE /* Blindfate iOSTests */,
+				D4AA3FD92454811C008E0BAE /* Blindfate iOSUITests */,
+				D4AA3FED24548181008E0BAE /* Blindfate MacOS */,
+				D4AA400A24548183008E0BAE /* Blindfate MacOSTests */,
+				D4AA401524548183008E0BAE /* Blindfate MacOSUITests */,
+				D4AA3FAE24548119008E0BAE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D4AA3FAE24548119008E0BAE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D4AA3FAD24548119008E0BAE /* Blindfate iOS.app */,
+				D4AA3FCB2454811C008E0BAE /* Blindfate iOSTests.xctest */,
+				D4AA3FD62454811C008E0BAE /* Blindfate iOSUITests.xctest */,
+				D4AA3FEC24548181008E0BAE /* Blindfate MacOS.app */,
+				D4AA400724548183008E0BAE /* Blindfate MacOSTests.xctest */,
+				D4AA401224548183008E0BAE /* Blindfate MacOSUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D4AA3FAF24548119008E0BAE /* Blindfate iOS */ = {
+			isa = PBXGroup;
+			children = (
+				D4AA3FB024548119008E0BAE /* AppDelegate.h */,
+				D4AA3FB124548119008E0BAE /* AppDelegate.m */,
+				D4AA3FB324548119008E0BAE /* Renderer.h */,
+				D4AA3FB424548119008E0BAE /* Renderer.m */,
+				D4AA3FB624548119008E0BAE /* GameViewController.h */,
+				D4AA3FB724548119008E0BAE /* GameViewController.m */,
+				D4AA3FB924548119008E0BAE /* Shaders.metal */,
+				D4AA3FBB24548119008E0BAE /* ShaderTypes.h */,
+				D4AA3FBC24548119008E0BAE /* Main.storyboard */,
+				D4AA3FBF2454811C008E0BAE /* Assets.xcassets */,
+				D4AA3FC12454811C008E0BAE /* LaunchScreen.storyboard */,
+				D4AA3FC42454811C008E0BAE /* Info.plist */,
+				D4AA3FC52454811C008E0BAE /* main.m */,
+			);
+			path = "Blindfate iOS";
+			sourceTree = "<group>";
+		};
+		D4AA3FCE2454811C008E0BAE /* Blindfate iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				D4AA3FCF2454811C008E0BAE /* Blindfate_iOSTests.m */,
+				D4AA3FD12454811C008E0BAE /* Info.plist */,
+			);
+			path = "Blindfate iOSTests";
+			sourceTree = "<group>";
+		};
+		D4AA3FD92454811C008E0BAE /* Blindfate iOSUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D4AA3FDA2454811C008E0BAE /* Blindfate_iOSUITests.m */,
+				D4AA3FDC2454811C008E0BAE /* Info.plist */,
+			);
+			path = "Blindfate iOSUITests";
+			sourceTree = "<group>";
+		};
+		D4AA3FED24548181008E0BAE /* Blindfate MacOS */ = {
+			isa = PBXGroup;
+			children = (
+				D4AA3FEE24548181008E0BAE /* AppDelegate.h */,
+				D4AA3FEF24548181008E0BAE /* AppDelegate.m */,
+				D4AA3FF124548181008E0BAE /* Renderer.h */,
+				D4AA3FF224548181008E0BAE /* Renderer.m */,
+				D4AA3FF424548181008E0BAE /* GameViewController.h */,
+				D4AA3FF524548181008E0BAE /* GameViewController.m */,
+				D4AA3FF724548181008E0BAE /* Shaders.metal */,
+				D4AA3FF924548181008E0BAE /* ShaderTypes.h */,
+				D4AA3FFA24548182008E0BAE /* Assets.xcassets */,
+				D4AA3FFC24548182008E0BAE /* Main.storyboard */,
+				D4AA3FFF24548182008E0BAE /* Info.plist */,
+				D4AA400024548182008E0BAE /* main.m */,
+				D4AA400224548182008E0BAE /* Blindfate_MacOS.entitlements */,
+			);
+			path = "Blindfate MacOS";
+			sourceTree = "<group>";
+		};
+		D4AA400A24548183008E0BAE /* Blindfate MacOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				D4AA400B24548183008E0BAE /* Blindfate_MacOSTests.m */,
+				D4AA400D24548183008E0BAE /* Info.plist */,
+			);
+			path = "Blindfate MacOSTests";
+			sourceTree = "<group>";
+		};
+		D4AA401524548183008E0BAE /* Blindfate MacOSUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D4AA401624548183008E0BAE /* Blindfate_MacOSUITests.m */,
+				D4AA401824548183008E0BAE /* Info.plist */,
+			);
+			path = "Blindfate MacOSUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D4AA3FAC24548119008E0BAE /* Blindfate iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4AA3FDF2454811C008E0BAE /* Build configuration list for PBXNativeTarget "Blindfate iOS" */;
+			buildPhases = (
+				D4AA3FA924548119008E0BAE /* Sources */,
+				D4AA3FAA24548119008E0BAE /* Frameworks */,
+				D4AA3FAB24548119008E0BAE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Blindfate iOS";
+			productName = "Blindfate iOS";
+			productReference = D4AA3FAD24548119008E0BAE /* Blindfate iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D4AA3FCA2454811C008E0BAE /* Blindfate iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4AA3FE22454811C008E0BAE /* Build configuration list for PBXNativeTarget "Blindfate iOSTests" */;
+			buildPhases = (
+				D4AA3FC72454811C008E0BAE /* Sources */,
+				D4AA3FC82454811C008E0BAE /* Frameworks */,
+				D4AA3FC92454811C008E0BAE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D4AA3FCD2454811C008E0BAE /* PBXTargetDependency */,
+			);
+			name = "Blindfate iOSTests";
+			productName = "Blindfate iOSTests";
+			productReference = D4AA3FCB2454811C008E0BAE /* Blindfate iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D4AA3FD52454811C008E0BAE /* Blindfate iOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4AA3FE52454811C008E0BAE /* Build configuration list for PBXNativeTarget "Blindfate iOSUITests" */;
+			buildPhases = (
+				D4AA3FD22454811C008E0BAE /* Sources */,
+				D4AA3FD32454811C008E0BAE /* Frameworks */,
+				D4AA3FD42454811C008E0BAE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D4AA3FD82454811C008E0BAE /* PBXTargetDependency */,
+			);
+			name = "Blindfate iOSUITests";
+			productName = "Blindfate iOSUITests";
+			productReference = D4AA3FD62454811C008E0BAE /* Blindfate iOSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		D4AA3FEB24548181008E0BAE /* Blindfate MacOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4AA401924548183008E0BAE /* Build configuration list for PBXNativeTarget "Blindfate MacOS" */;
+			buildPhases = (
+				D4AA3FE824548181008E0BAE /* Sources */,
+				D4AA3FE924548181008E0BAE /* Frameworks */,
+				D4AA3FEA24548181008E0BAE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Blindfate MacOS";
+			productName = "Blindfate MacOS";
+			productReference = D4AA3FEC24548181008E0BAE /* Blindfate MacOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D4AA400624548183008E0BAE /* Blindfate MacOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4AA401C24548183008E0BAE /* Build configuration list for PBXNativeTarget "Blindfate MacOSTests" */;
+			buildPhases = (
+				D4AA400324548183008E0BAE /* Sources */,
+				D4AA400424548183008E0BAE /* Frameworks */,
+				D4AA400524548183008E0BAE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D4AA400924548183008E0BAE /* PBXTargetDependency */,
+			);
+			name = "Blindfate MacOSTests";
+			productName = "Blindfate MacOSTests";
+			productReference = D4AA400724548183008E0BAE /* Blindfate MacOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D4AA401124548183008E0BAE /* Blindfate MacOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4AA401F24548183008E0BAE /* Build configuration list for PBXNativeTarget "Blindfate MacOSUITests" */;
+			buildPhases = (
+				D4AA400E24548183008E0BAE /* Sources */,
+				D4AA400F24548183008E0BAE /* Frameworks */,
+				D4AA401024548183008E0BAE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D4AA401424548183008E0BAE /* PBXTargetDependency */,
+			);
+			name = "Blindfate MacOSUITests";
+			productName = "Blindfate MacOSUITests";
+			productReference = D4AA401224548183008E0BAE /* Blindfate MacOSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D4AA3FA524548119008E0BAE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = RuzzGames;
+				TargetAttributes = {
+					D4AA3FAC24548119008E0BAE = {
+						CreatedOnToolsVersion = 11.4.1;
+					};
+					D4AA3FCA2454811C008E0BAE = {
+						CreatedOnToolsVersion = 11.4.1;
+						TestTargetID = D4AA3FAC24548119008E0BAE;
+					};
+					D4AA3FD52454811C008E0BAE = {
+						CreatedOnToolsVersion = 11.4.1;
+						TestTargetID = D4AA3FAC24548119008E0BAE;
+					};
+					D4AA3FEB24548181008E0BAE = {
+						CreatedOnToolsVersion = 11.4.1;
+					};
+					D4AA400624548183008E0BAE = {
+						CreatedOnToolsVersion = 11.4.1;
+						TestTargetID = D4AA3FEB24548181008E0BAE;
+					};
+					D4AA401124548183008E0BAE = {
+						CreatedOnToolsVersion = 11.4.1;
+						TestTargetID = D4AA3FEB24548181008E0BAE;
+					};
+				};
+			};
+			buildConfigurationList = D4AA3FA824548119008E0BAE /* Build configuration list for PBXProject "Blindfate iOS" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D4AA3FA424548119008E0BAE;
+			productRefGroup = D4AA3FAE24548119008E0BAE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D4AA3FAC24548119008E0BAE /* Blindfate iOS */,
+				D4AA3FCA2454811C008E0BAE /* Blindfate iOSTests */,
+				D4AA3FD52454811C008E0BAE /* Blindfate iOSUITests */,
+				D4AA3FEB24548181008E0BAE /* Blindfate MacOS */,
+				D4AA400624548183008E0BAE /* Blindfate MacOSTests */,
+				D4AA401124548183008E0BAE /* Blindfate MacOSUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D4AA3FAB24548119008E0BAE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4AA3FC32454811C008E0BAE /* LaunchScreen.storyboard in Resources */,
+				D4AA3FC02454811C008E0BAE /* Assets.xcassets in Resources */,
+				D4AA3FBE24548119008E0BAE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4AA3FC92454811C008E0BAE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4AA3FD42454811C008E0BAE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4AA3FEA24548181008E0BAE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4AA3FFB24548182008E0BAE /* Assets.xcassets in Resources */,
+				D4AA3FFE24548182008E0BAE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4AA400524548183008E0BAE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4AA401024548183008E0BAE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D4AA3FA924548119008E0BAE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4AA3FC62454811C008E0BAE /* main.m in Sources */,
+				D4AA3FBA24548119008E0BAE /* Shaders.metal in Sources */,
+				D4AA3FB524548119008E0BAE /* Renderer.m in Sources */,
+				D4AA3FB824548119008E0BAE /* GameViewController.m in Sources */,
+				D4AA3FB224548119008E0BAE /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4AA3FC72454811C008E0BAE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4AA3FD02454811C008E0BAE /* Blindfate_iOSTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4AA3FD22454811C008E0BAE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4AA3FDB2454811C008E0BAE /* Blindfate_iOSUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4AA3FE824548181008E0BAE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4AA400124548182008E0BAE /* main.m in Sources */,
+				D4AA3FF824548181008E0BAE /* Shaders.metal in Sources */,
+				D4AA3FF324548181008E0BAE /* Renderer.m in Sources */,
+				D4AA3FF624548181008E0BAE /* GameViewController.m in Sources */,
+				D4AA3FF024548181008E0BAE /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4AA400324548183008E0BAE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4AA400C24548183008E0BAE /* Blindfate_MacOSTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4AA400E24548183008E0BAE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4AA401724548183008E0BAE /* Blindfate_MacOSUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D4AA3FCD2454811C008E0BAE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4AA3FAC24548119008E0BAE /* Blindfate iOS */;
+			targetProxy = D4AA3FCC2454811C008E0BAE /* PBXContainerItemProxy */;
+		};
+		D4AA3FD82454811C008E0BAE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4AA3FAC24548119008E0BAE /* Blindfate iOS */;
+			targetProxy = D4AA3FD72454811C008E0BAE /* PBXContainerItemProxy */;
+		};
+		D4AA400924548183008E0BAE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4AA3FEB24548181008E0BAE /* Blindfate MacOS */;
+			targetProxy = D4AA400824548183008E0BAE /* PBXContainerItemProxy */;
+		};
+		D4AA401424548183008E0BAE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4AA3FEB24548181008E0BAE /* Blindfate MacOS */;
+			targetProxy = D4AA401324548183008E0BAE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D4AA3FBC24548119008E0BAE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4AA3FBD24548119008E0BAE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D4AA3FC12454811C008E0BAE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4AA3FC22454811C008E0BAE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D4AA3FFC24548182008E0BAE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4AA3FFD24548182008E0BAE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D4AA3FDD2454811C008E0BAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D4AA3FDE2454811C008E0BAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D4AA3FE02454811C008E0BAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QKB88VXX45;
+				INFOPLIST_FILE = "Blindfate iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ruzzgames.Blindfate-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D4AA3FE12454811C008E0BAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QKB88VXX45;
+				INFOPLIST_FILE = "Blindfate iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ruzzgames.Blindfate-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D4AA3FE32454811C008E0BAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QKB88VXX45;
+				INFOPLIST_FILE = "Blindfate iOSTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ruzzgames.Blindfate-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Blindfate iOS.app/Blindfate iOS";
+			};
+			name = Debug;
+		};
+		D4AA3FE42454811C008E0BAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QKB88VXX45;
+				INFOPLIST_FILE = "Blindfate iOSTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ruzzgames.Blindfate-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Blindfate iOS.app/Blindfate iOS";
+			};
+			name = Release;
+		};
+		D4AA3FE62454811C008E0BAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QKB88VXX45;
+				INFOPLIST_FILE = "Blindfate iOSUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ruzzgames.Blindfate-iOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Blindfate iOS";
+			};
+			name = Debug;
+		};
+		D4AA3FE72454811C008E0BAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QKB88VXX45;
+				INFOPLIST_FILE = "Blindfate iOSUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ruzzgames.Blindfate-iOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Blindfate iOS";
+			};
+			name = Release;
+		};
+		D4AA401A24548183008E0BAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Blindfate MacOS/Blindfate_MacOS.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = QKB88VXX45;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Blindfate MacOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ruzzgames.Blindfate-MacOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D4AA401B24548183008E0BAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Blindfate MacOS/Blindfate_MacOS.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = QKB88VXX45;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Blindfate MacOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ruzzgames.Blindfate-MacOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		D4AA401D24548183008E0BAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = QKB88VXX45;
+				INFOPLIST_FILE = "Blindfate MacOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ruzzgames.Blindfate-MacOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Blindfate MacOS.app/Contents/MacOS/Blindfate MacOS";
+			};
+			name = Debug;
+		};
+		D4AA401E24548183008E0BAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = QKB88VXX45;
+				INFOPLIST_FILE = "Blindfate MacOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ruzzgames.Blindfate-MacOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Blindfate MacOS.app/Contents/MacOS/Blindfate MacOS";
+			};
+			name = Release;
+		};
+		D4AA402024548183008E0BAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = QKB88VXX45;
+				INFOPLIST_FILE = "Blindfate MacOSUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ruzzgames.Blindfate-MacOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_TARGET_NAME = "Blindfate MacOS";
+			};
+			name = Debug;
+		};
+		D4AA402124548183008E0BAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = QKB88VXX45;
+				INFOPLIST_FILE = "Blindfate MacOSUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ruzzgames.Blindfate-MacOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_TARGET_NAME = "Blindfate MacOS";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D4AA3FA824548119008E0BAE /* Build configuration list for PBXProject "Blindfate iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4AA3FDD2454811C008E0BAE /* Debug */,
+				D4AA3FDE2454811C008E0BAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4AA3FDF2454811C008E0BAE /* Build configuration list for PBXNativeTarget "Blindfate iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4AA3FE02454811C008E0BAE /* Debug */,
+				D4AA3FE12454811C008E0BAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4AA3FE22454811C008E0BAE /* Build configuration list for PBXNativeTarget "Blindfate iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4AA3FE32454811C008E0BAE /* Debug */,
+				D4AA3FE42454811C008E0BAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4AA3FE52454811C008E0BAE /* Build configuration list for PBXNativeTarget "Blindfate iOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4AA3FE62454811C008E0BAE /* Debug */,
+				D4AA3FE72454811C008E0BAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4AA401924548183008E0BAE /* Build configuration list for PBXNativeTarget "Blindfate MacOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4AA401A24548183008E0BAE /* Debug */,
+				D4AA401B24548183008E0BAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4AA401C24548183008E0BAE /* Build configuration list for PBXNativeTarget "Blindfate MacOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4AA401D24548183008E0BAE /* Debug */,
+				D4AA401E24548183008E0BAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4AA401F24548183008E0BAE /* Build configuration list for PBXNativeTarget "Blindfate MacOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4AA402024548183008E0BAE /* Debug */,
+				D4AA402124548183008E0BAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D4AA3FA524548119008E0BAE /* Project object */;
+}
