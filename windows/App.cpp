@@ -55,8 +55,18 @@ void App::Initialize(CoreApplicationView^ applicationView)
 }
 
 // Called when the CoreWindow object is created (or re-created).
+// This is the visible window the user sees i.e. the game window
 void App::SetWindow(CoreWindow^ window)
 {
+
+
+	//detect keypress from keyboard
+	window->KeyDown +=
+		ref new TypedEventHandler<CoreWindow^, KeyEventArgs^>(this, &App::OnKeyDown);
+	window->KeyUp +=
+		ref new TypedEventHandler<CoreWindow^, KeyEventArgs^>(this, &App::OnKeyUp);
+
+
 	window->SizeChanged += 
 		ref new TypedEventHandler<CoreWindow^, WindowSizeChangedEventArgs^>(this, &App::OnWindowSizeChanged);
 
@@ -76,6 +86,8 @@ void App::SetWindow(CoreWindow^ window)
 
 	DisplayInformation::DisplayContentsInvalidated +=
 		ref new TypedEventHandler<DisplayInformation^, Object^>(this, &App::OnDisplayContentsInvalidated);
+
+
 }
 
 // Initializes scene resources, or loads a previously saved app state.
@@ -159,6 +171,26 @@ void App::OnResuming(Platform::Object^ sender, Platform::Object^ args)
 }
 
 // Window event handlers.
+void App::OnKeyDown(CoreWindow^ sender, KeyEventArgs^ args)
+{
+	// check which key is pressed
+	Windows::System::VirtualKey Key; 
+	Key = args->VirtualKey;
+
+	// pass which key was pressed back to game app BlindfateMain
+	m_main->OnKeyPress(Key);
+}
+
+
+void App::OnKeyUp(CoreWindow^ sender, KeyEventArgs^ args)
+{
+	// check which key is pressed
+	Windows::System::VirtualKey Key;
+	Key = args->VirtualKey;
+
+	// pass which key was pressed back to game app BlindfateMain
+	m_main->OnKeyRelease(Key);
+}
 
 void App::OnWindowSizeChanged(CoreWindow^ sender, WindowSizeChangedEventArgs^ args)
 {
