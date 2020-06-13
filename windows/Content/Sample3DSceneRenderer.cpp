@@ -77,7 +77,7 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 		m_pixelShader = fileData;
 	});
 
-	// Create the pipeline state once the shaders are loaded.
+	// Create the pipeline state (PSO) once the shaders are loaded.
 	auto createPipelineStateTask = (createPSTask && createVSTask).then([this]() {
 
 		static const D3D12_INPUT_ELEMENT_DESC inputLayout[] =
@@ -91,7 +91,7 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 		state.pRootSignature = m_rootSignature.Get();
         state.VS = CD3DX12_SHADER_BYTECODE(&m_vertexShader[0], m_vertexShader.size());
         state.PS = CD3DX12_SHADER_BYTECODE(&m_pixelShader[0], m_pixelShader.size());
-		state.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
+		state.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_FILL_MODE_SOLID, D3D12_CULL_MODE_BACK, FALSE, D3D12_DEFAULT_DEPTH_BIAS, D3D12_DEFAULT_DEPTH_BIAS_CLAMP, D3D12_DEFAULT_SLOPE_SCALED_DEPTH_BIAS, TRUE, FALSE, FALSE, 0, D3D12_CONSERVATIVE_RASTERIZATION_MODE_OFF);
 		state.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
 		state.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
 		state.SampleMask = UINT_MAX;
@@ -102,6 +102,11 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 		state.SampleDesc.Count = 1;
 
 		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateGraphicsPipelineState(&state, IID_PPV_ARGS(&m_pipelineState)));
+
+		// create wireframe PSO
+		state.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_FILL_MODE_WIREFRAME, D3D12_CULL_MODE_BACK, FALSE, D3D12_DEFAULT_DEPTH_BIAS, D3D12_DEFAULT_DEPTH_BIAS_CLAMP, D3D12_DEFAULT_SLOPE_SCALED_DEPTH_BIAS, TRUE, FALSE, FALSE, 0, D3D12_CONSERVATIVE_RASTERIZATION_MODE_OFF);
+		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateGraphicsPipelineState(&state, IID_PPV_ARGS(&m_pipelineState_wireframe)));
+
 
 		// Shader data can be deleted once the pipeline state is created.
 		m_vertexShader.clear();
@@ -304,10 +309,14 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 // Initializes view parameters when the window size changes.
 void Sample3DSceneRenderer::CreateWindowSizeDependentResources()
 {
+	// This part is the 2D viewport and setting up a simple camera to view it
+
+	// get window size
 	Size outputSize = m_deviceResources->GetOutputSize();
 	float aspectRatio = outputSize.Width / outputSize.Height;
 	float fovAngleY = 70.0f * XM_PI / 180.0f;
 
+	// create the viewport
 	D3D12_VIEWPORT viewport = m_deviceResources->GetScreenViewport();
 	m_scissorRect = { 0, 0, static_cast<LONG>(viewport.Width), static_cast<LONG>(viewport.Height)};
 
@@ -325,11 +334,12 @@ void Sample3DSceneRenderer::CreateWindowSizeDependentResources()
 	// this transform should not be applied.
 
 	// This sample makes use of a right-handed coordinate system using row-major matrices.
+	// setup lens of camera
 	XMMATRIX perspectiveMatrix = XMMatrixPerspectiveFovRH(
-		fovAngleY,
-		aspectRatio,
-		0.01f,
-		100.0f
+		fovAngleY,		// Fov Angle Y in radians
+		aspectRatio,	// aspect ratio of X-Y view space
+		0.01f,			// Near clipping plane
+		100.0f			// Far clipping plane
 		);
 
 	XMFLOAT4X4 orientation = m_deviceResources->GetOrientationTransform3D();
@@ -340,11 +350,14 @@ void Sample3DSceneRenderer::CreateWindowSizeDependentResources()
 		XMMatrixTranspose(perspectiveMatrix * orientationMatrix)
 		);
 
+	// setup camera
 	// Eye is at (0,0.7,1.5), looking at point (0,-0.1,0) with the up-vector along the y-axis.
-	static const XMVECTORF32 eye = { 0.0f, 0.7f, 1.5f, 0.0f };
-	static const XMVECTORF32 at = { 0.0f, -0.1f, 0.0f, 0.0f };
-	static const XMVECTORF32 up = { 0.0f, 1.0f, 0.0f, 0.0f };
+	// points are x,y,z,w
+	static const XMVECTORF32 eye = { 0.0f, 0.7f, 1.5f, 0.0f };	// eye position
+	static const XMVECTORF32 at = { 0.0f, -0.1f, 0.0f, 0.0f };	// focal point position
+	static const XMVECTORF32 up = { 0.0f, 1.0f, 0.0f, 0.0f };	// up direction
 
+	// camera - this camera uses Right Hand 3D coordinate system
 	XMStoreFloat4x4(&m_constantBufferData.view, XMMatrixTranspose(XMMatrixLookAtRH(eye, at, up)));
 }
 
@@ -360,6 +373,14 @@ void Sample3DSceneRenderer::Update(DX::StepTimer const& timer)
 
 			Rotate(m_angle);
 		}
+
+		// values change below depending on user input eg: pressing keyboard, mouse, gamepad, touchscreen, etc
+		static const XMVECTORF32 eye = { 0.0f, 0.7f, 1.5f, 0.0f };
+		static const XMVECTORF32 at = { 0.0f, -0.1f, 0.0f, 0.0f };
+		static const XMVECTORF32 up = { 0.0f, 1.0f, 0.0f, 0.0f };
+
+		// update view if camera has changed.
+		XMStoreFloat4x4(&m_constantBufferData.view, XMMatrixTranspose(XMMatrixLookAtRH(eye, at, up)));
 
 		// Update the constant buffer resource.
 		UINT8* destination = m_mappedConstantBuffer + (m_deviceResources->GetCurrentFrameIndex() * c_alignedConstantBufferSize);
@@ -440,7 +461,11 @@ bool Sample3DSceneRenderer::Render()
 	DX::ThrowIfFailed(m_deviceResources->GetCommandAllocator()->Reset());
 
 	// The command list can be reset anytime after ExecuteCommandList() is called.
-	DX::ThrowIfFailed(m_commandList->Reset(m_deviceResources->GetCommandAllocator(), m_pipelineState.Get()));
+	// display as wireframe or solid
+	if (m_displayWireframe == true)
+		DX::ThrowIfFailed(m_commandList->Reset(m_deviceResources->GetCommandAllocator(), m_pipelineState_wireframe.Get()));
+	else
+		DX::ThrowIfFailed(m_commandList->Reset(m_deviceResources->GetCommandAllocator(), m_pipelineState.Get()));
 
 	PIXBeginEvent(m_commandList.Get(), 0, L"Draw the cube");
 	{

@@ -23,6 +23,10 @@ namespace Blindfate
 		void StopTracking();
 		bool IsTracking() { return m_tracking; }
 
+		// will fix later - usually better to create a method to access variables in classes :-)
+		bool m_displayWireframe = false; // shows wireframe geometry if true
+
+
 	private:
 		void LoadState();
 		void Rotate(float radians);
@@ -37,7 +41,8 @@ namespace Blindfate
 		// Direct3D resources for cube geometry.
 		Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>	m_commandList;
 		Microsoft::WRL::ComPtr<ID3D12RootSignature>			m_rootSignature;
-		Microsoft::WRL::ComPtr<ID3D12PipelineState>			m_pipelineState;
+		Microsoft::WRL::ComPtr<ID3D12PipelineState>			m_pipelineState; // default pipeline - solid PSO
+		Microsoft::WRL::ComPtr<ID3D12PipelineState>			m_pipelineState_wireframe;  // wireframe PSO
 		Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>		m_cbvHeap;
 		Microsoft::WRL::ComPtr<ID3D12Resource>				m_vertexBuffer;
 		Microsoft::WRL::ComPtr<ID3D12Resource>				m_indexBuffer;
@@ -56,6 +61,7 @@ namespace Blindfate
 		float	m_radiansPerSecond;
 		float	m_angle;
 		bool	m_tracking;
+
 	};
 }
 
