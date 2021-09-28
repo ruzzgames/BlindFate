@@ -1,11 +1,19 @@
 //***************************************************************************************
 // Blindfate.cpp 
-//(C) Robert Ruzbacky 2020 All Rights Reserved
+//(C) Robert Ruzbacky 2021 All Rights Reserved
 //
 // Based on code by Frank Luna (C) 2015 All Rights Reserved.
 // Code is based on the book Introduction to 3D Game Programming with DirectX 12
 // Codebase of book is here https://github.com/d3dcoder/d3d12book
+//
+// To understand the process of Direct 3D, read the following:
+// https://docs.microsoft.com/en-us/windows/win32/direct3d12/creating-a-basic-direct3d-12-component
 //***************************************************************************************
+
+//*** Compile Note:
+// change "Conformance Mode" to "No" in the C/C++ -> Language project settings.
+// eventually this will have to be fixed as it says  "Compiler Error C2102 '&' requires l-value"
+// happens after VS2019 upgrade
 
 #include "d3dApp.h"
 #include "MathHelper.h"
@@ -19,7 +27,6 @@
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
 using namespace DirectX::PackedVector;
-
 
 const int gNumFrameResources = 3;
 
@@ -60,7 +67,7 @@ struct RenderItem
 };
 
 
-// Game app
+// Game app - derived from D3DApp
 class GameApp : public D3DApp
 {
 public:
@@ -152,6 +159,9 @@ private:
 	Camera mCamera;
 	POINT mLastMousePos;
 
+	int screen_width;
+	int screen_height;
+
 	// define game state - the status of the game
 	int game_state;
 
@@ -200,6 +210,12 @@ bool GameApp::Initialize()
 	game_state = GAME_STATE_INIT;
 
 	// create a window and initialise Direct3D
+	// screen_width = GetSystemMetrics(SM_CXSCREEN); // get width of screen
+	// screen_height = GetSystemMetrics(SM_CYSCREEN); // get height of screen
+	screen_width = 1024;
+	screen_height = 728;
+	D3DApp::mClientWidth = screen_width;
+	D3DApp::mClientHeight = screen_height;
 	if (!D3DApp::Initialize())
 		return false;
 
@@ -215,7 +231,7 @@ bool GameApp::Initialize()
 
 	//setup the camera (x,y,z)
 	// this is the starting position in our world
-	mCamera.SetPosition(0.0f, 1.0f, -58.0f);
+	mCamera.SetPosition(0.0f, 1.0f, -75.0f);
 
 	LoadTextures();
 	BuildRootSignature();
@@ -227,7 +243,7 @@ bool GameApp::Initialize()
 	BuildMaterials(); // for lighting
 	BuildRenderItems();
 	BuildFrameResources();
-//	BuildConstantBufferViews();
+	//	BuildConstantBufferViews();
 	BuildPSOs();
 
 
@@ -248,7 +264,7 @@ void GameApp::OnResize()
 {
 	D3DApp::OnResize();
 
-	mCamera.SetLens(0.25f*MathHelper::Pi, AspectRatio(), 1.0f, 1000.0f);
+	mCamera.SetLens(0.25f * MathHelper::Pi, AspectRatio(), 1.0f, 1000.0f);
 
 }
 
@@ -266,7 +282,7 @@ void GameApp::Update(const GameTimer& gt)
 	XMMATRIX world = XMLoadFloat4x4(&mWorld);
 	XMMATRIX proj = mCamera.GetProj();
 	XMStoreFloat4x4(&mProj, proj);
-	XMMATRIX worldViewProj = world*view*proj;
+	XMMATRIX worldViewProj = world * view * proj;
 
 
 	// Cycle through the circular frame resource array.
@@ -296,7 +312,7 @@ void GameApp::Update(const GameTimer& gt)
 		{
 			Sleep(3000);
 			game_state = GAME_STATE_MENU;
-			mCamera.SetPosition(0.0f, 1.0f, -15.0f);
+			mCamera.SetPosition(0.0f, 1.0f, -17.0f);
 		}
 	}
 
@@ -340,7 +356,7 @@ void GameApp::Draw(const GameTimer& gt)
 	// Specify the buffers we are going to render to.
 	mCommandList->OMSetRenderTargets(1, &CurrentBackBufferView(), true, &DepthStencilView());
 
-//	ID3D12DescriptorHeap* descriptorHeaps[] = { mCbvHeap.Get() };
+	//	ID3D12DescriptorHeap* descriptorHeaps[] = { mCbvHeap.Get() };
 	ID3D12DescriptorHeap* descriptorHeaps[] = { mSrvDescriptorHeap.Get() };
 	mCommandList->SetDescriptorHeaps(_countof(descriptorHeaps), descriptorHeaps);
 
@@ -350,10 +366,10 @@ void GameApp::Draw(const GameTimer& gt)
 	mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
 
 
-//	int passCbvIndex = mPassCbvOffset + mCurrFrameResourceIndex;
-//	auto passCbvHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(mCbvHeap->GetGPUDescriptorHandleForHeapStart());
-//	passCbvHandle.Offset(passCbvIndex, mCbvSrvUavDescriptorSize);
-//	mCommandList->SetGraphicsRootDescriptorTable(1, passCbvHandle);
+	//	int passCbvIndex = mPassCbvOffset + mCurrFrameResourceIndex;
+	//	auto passCbvHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(mCbvHeap->GetGPUDescriptorHandleForHeapStart());
+	//	passCbvHandle.Offset(passCbvIndex, mCbvSrvUavDescriptorSize);
+	//	mCommandList->SetGraphicsRootDescriptorTable(1, passCbvHandle);
 
 	DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
 
@@ -400,8 +416,8 @@ void GameApp::OnMouseMove(WPARAM btnState, int x, int y)
 	if ((btnState & MK_LBUTTON) != 0)
 	{
 		// Make each pixel correspond to a quarter of a degree.
-		float dx = XMConvertToRadians(0.25f*static_cast<float>(x - mLastMousePos.x));
-		float dy = XMConvertToRadians(0.25f*static_cast<float>(y - mLastMousePos.y));
+		float dx = XMConvertToRadians(0.25f * static_cast<float>(x - mLastMousePos.x));
+		float dy = XMConvertToRadians(0.25f * static_cast<float>(y - mLastMousePos.y));
 
 		mCamera.Pitch(dy);		// rotate up / down
 		mCamera.RotateY(dx);	// rotate left / right
@@ -423,42 +439,42 @@ void GameApp::OnKeyboardInput(const GameTimer& gt)
 
 	// walk forward
 	if (GetAsyncKeyState('W') & 0x8000)
-		mCamera.Walk(10.0f*dt);
+		mCamera.Walk(10.0f * dt);
 
 	// walk backward
 	if (GetAsyncKeyState('S') & 0x8000)
-		mCamera.Walk(-10.0f*dt);
+		mCamera.Walk(-10.0f * dt);
 
 	// strafe right (ie. step to the right)
 	if (GetAsyncKeyState('E') & 0x8000)
-		mCamera.Strafe(10.0f*dt);
+		mCamera.Strafe(10.0f * dt);
 
 	// strafe left (ie. step to the left)
 	if (GetAsyncKeyState('Q') & 0x8000)
-		mCamera.Strafe(-10.0f*dt);
+		mCamera.Strafe(-10.0f * dt);
 
 	// rotate to the left
 	if (GetAsyncKeyState('A') & 0x8000)
 	{
-		mCamera.RotateY(-3.0f*dt);
+		mCamera.RotateY(-3.0f * dt);
 	}
-		
+
 	// rotate to the right
 	if (GetAsyncKeyState('D') & 0x8000)
 	{
-		mCamera.RotateY(3.0f*dt);
+		mCamera.RotateY(3.0f * dt);
 	}
 
 	// go up
 	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
 	{
-		mCamera.Fly(10.0f*dt);
+		mCamera.Fly(10.0f * dt);
 	}
 
 	// go down
 	if (GetAsyncKeyState('X') & 0x8000)
 	{
-		mCamera.Fly(-10.0f*dt);
+		mCamera.Fly(-10.0f * dt);
 	}
 
 
@@ -469,9 +485,9 @@ void GameApp::OnKeyboardInput(const GameTimer& gt)
 void GameApp::UpdateCamera(const GameTimer& gt)
 {
 	// Convert Spherical to Cartesian coordinates.
-	mEyePos.x = mRadius*sinf(mPhi)*cosf(mTheta);
-	mEyePos.z = mRadius*sinf(mPhi)*sinf(mTheta);
-	mEyePos.y = mRadius*cosf(mPhi);
+	mEyePos.x = mRadius * sinf(mPhi) * cosf(mTheta);
+	mEyePos.z = mRadius * sinf(mPhi) * sinf(mTheta);
+	mEyePos.y = mRadius * cosf(mPhi);
 
 	// Build the view matrix.
 	XMVECTOR pos = XMVectorSet(mEyePos.x, mEyePos.y, mEyePos.z, 1.0f);
@@ -718,7 +734,7 @@ void GameApp::BuildRootSignature()
 	// programs expect.  If we think of the shader programs as a function, and
 	// the input resources as function parameters, then the root signature can be
 	// thought of as defining the function signature.      
-	
+
 //	CD3DX12_DESCRIPTOR_RANGE cbvTable0;
 //	cbvTable0.Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1, 0);
 
@@ -757,10 +773,10 @@ void GameApp::BuildRootSignature()
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
 
 
-//	CD3DX12_ROOT_SIGNATURE_DESC rootSigDesc(2, slotRootParameter, 0, nullptr,
-//		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
+	//	CD3DX12_ROOT_SIGNATURE_DESC rootSigDesc(2, slotRootParameter, 0, nullptr,
+	//		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
 
-	// create a root signature with a single slot which points to a descriptor range consisting of a single constant buffer
+		// create a root signature with a single slot which points to a descriptor range consisting of a single constant buffer
 	ComPtr<ID3DBlob> serializedRootSig = nullptr;
 	ComPtr<ID3DBlob> errorBlob = nullptr;
 	HRESULT hr = D3D12SerializeRootSignature(&rootSigDesc, D3D_ROOT_SIGNATURE_VERSION_1,
@@ -878,7 +894,7 @@ void GameApp::BuildShapeGeometry()
 	GeometryGenerator::MeshData grid = geoGen.CreateGrid(20.0f, 30.0f, 60, 40);
 	GeometryGenerator::MeshData sphere = geoGen.CreateSphere(0.5f, 20, 20);
 	GeometryGenerator::MeshData cylinder = geoGen.CreateCylinder(0.5f, 0.3f, 3.0f, 20, 20);
-	GeometryGenerator::MeshData building = geoGen.CreateBuilding(2.0f, 10.0f, 3.0f, 3);
+	GeometryGenerator::MeshData building = geoGen.CreateBox(2.0f, 10.0f, 3.0f, 3);
 	GeometryGenerator::MeshData menu = geoGen.CreateGrid(20.0f, 30.0f, 60, 40);
 
 
@@ -892,7 +908,7 @@ void GameApp::BuildShapeGeometry()
 	UINT gridVertexOffset = (UINT)box.Vertices.size();
 	UINT sphereVertexOffset = gridVertexOffset + (UINT)grid.Vertices.size();
 	UINT cylinderVertexOffset = sphereVertexOffset + (UINT)sphere.Vertices.size();
-    UINT buildingVertexOffset = cylinderVertexOffset + (UINT)cylinder.Vertices.size();
+	UINT buildingVertexOffset = cylinderVertexOffset + (UINT)cylinder.Vertices.size();
 	UINT menuVertexOffset = buildingVertexOffset + (UINT)building.Vertices.size();
 
 	// Cache the starting index for each object in the concatenated index buffer.
@@ -947,7 +963,7 @@ void GameApp::BuildShapeGeometry()
 		sphere.Vertices.size() +
 		cylinder.Vertices.size() +
 		building.Vertices.size() +
-	    menu.Vertices.size();
+		menu.Vertices.size();
 
 	std::vector<Vertex> vertices(totalVertexCount);
 
@@ -1221,7 +1237,7 @@ void GameApp::BuildPSOs()
 		mShaders["opaquePS"]->GetBufferSize()
 	};
 	opaquePsoDesc.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
-//	opaquePsoDesc.RasterizerState.FillMode = D3D12_FILL_MODE_SOLID;
+	//	opaquePsoDesc.RasterizerState.FillMode = D3D12_FILL_MODE_SOLID;
 	opaquePsoDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
 	opaquePsoDesc.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
 	opaquePsoDesc.SampleMask = UINT_MAX;
@@ -1241,7 +1257,7 @@ void GameApp::BuildPSOs()
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC opaqueWireframePsoDesc = opaquePsoDesc;
 	opaqueWireframePsoDesc.RasterizerState.FillMode = D3D12_FILL_MODE_WIREFRAME;
 	ThrowIfFailed(md3dDevice->CreateGraphicsPipelineState(&opaqueWireframePsoDesc, IID_PPV_ARGS(&mPSOs["opaque_wireframe"])));
-//	ThrowIfFailed(md3dDevice->CreateGraphicsPipelineState(&opaquePsoDesc, IID_PPV_ARGS(&mOpaquePSO)));
+	//	ThrowIfFailed(md3dDevice->CreateGraphicsPipelineState(&opaquePsoDesc, IID_PPV_ARGS(&mOpaquePSO)));
 
 }
 
@@ -1292,7 +1308,7 @@ void GameApp::BuildMaterials()
 	carMat->Name = "carMat";
 	carMat->MatCBIndex = 4;
 	carMat->DiffuseSrvHeapIndex = 4;
-//	carMat->DiffuseAlbedo = XMFLOAT4(Colors::Red);
+	//	carMat->DiffuseAlbedo = XMFLOAT4(Colors::Red);
 	carMat->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	carMat->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05);
 	carMat->Roughness = 0.3f;
@@ -1313,10 +1329,11 @@ void GameApp::BuildMaterials()
 	mMaterials["splashscreenMat"] = std::move(splashscreenMat);
 }
 
+// build 3D models to render and position them in the 3D world
 void GameApp::BuildRenderItems()
 {
 	auto boxRitem = std::make_unique<RenderItem>();
-	XMStoreFloat4x4(&boxRitem->World, XMMatrixScaling(2.0f, 2.0f, 2.0f)*XMMatrixTranslation(0.0f, 0.5f, 0.0f));
+	XMStoreFloat4x4(&boxRitem->World, XMMatrixScaling(2.0f, 2.0f, 2.0f) * XMMatrixTranslation(0.0f, 0.5f, 0.0f));
 	XMStoreFloat4x4(&boxRitem->TexTransform, XMMatrixScaling(1.0f, 1.0f, 1.0f));
 	boxRitem->ObjCBIndex = 0;
 	boxRitem->Mat = mMaterials["stone0"].get();
@@ -1340,7 +1357,7 @@ void GameApp::BuildRenderItems()
 	mAllRitems.push_back(std::move(gridRitem));
 
 	auto skullRitem = std::make_unique<RenderItem>();
-	XMStoreFloat4x4(&skullRitem->World, XMMatrixScaling(0.5f, 0.5f, 0.5f)*XMMatrixTranslation(0.0f, 1.0f, 0.0f));
+	XMStoreFloat4x4(&skullRitem->World, XMMatrixScaling(0.5f, 0.5f, 0.5f) * XMMatrixTranslation(0.0f, 1.0f, 0.0f));
 	skullRitem->TexTransform = MathHelper::Identity4x4();
 	skullRitem->ObjCBIndex = 2;
 	skullRitem->Mat = mMaterials["skullMat"].get();
@@ -1352,7 +1369,7 @@ void GameApp::BuildRenderItems()
 	mAllRitems.push_back(std::move(skullRitem));
 
 	auto carRitem = std::make_unique<RenderItem>();
-	XMStoreFloat4x4(&carRitem->World, XMMatrixScaling(0.5f, 0.5f, 0.5f)*XMMatrixTranslation(0.0f, 1.0f, -6.0f));
+	XMStoreFloat4x4(&carRitem->World, XMMatrixScaling(0.5f, 0.5f, 0.5f) * XMMatrixTranslation(0.0f, 1.0f, -6.0f));
 	carRitem->TexTransform = MathHelper::Identity4x4();
 	carRitem->ObjCBIndex = 3;
 	carRitem->Mat = mMaterials["carMat"].get();
@@ -1375,11 +1392,11 @@ void GameApp::BuildRenderItems()
 		auto leftSphereRitem = std::make_unique<RenderItem>();
 		auto rightSphereRitem = std::make_unique<RenderItem>();
 
-		XMMATRIX leftCylWorld = XMMatrixTranslation(-5.0f, 1.5f, -10.0f + i*5.0f);
-		XMMATRIX rightCylWorld = XMMatrixTranslation(+5.0f, 1.5f, -10.0f + i*5.0f);
+		XMMATRIX leftCylWorld = XMMatrixTranslation(-5.0f, 1.5f, -10.0f + i * 5.0f);
+		XMMATRIX rightCylWorld = XMMatrixTranslation(+5.0f, 1.5f, -10.0f + i * 5.0f);
 
-		XMMATRIX leftSphereWorld = XMMatrixTranslation(-5.0f, 3.5f, -10.0f + i*5.0f);
-		XMMATRIX rightSphereWorld = XMMatrixTranslation(+5.0f, 3.5f, -10.0f + i*5.0f);
+		XMMATRIX leftSphereWorld = XMMatrixTranslation(-5.0f, 3.5f, -10.0f + i * 5.0f);
+		XMMATRIX rightSphereWorld = XMMatrixTranslation(+5.0f, 3.5f, -10.0f + i * 5.0f);
 
 		XMStoreFloat4x4(&leftCylRitem->World, rightCylWorld);
 		XMStoreFloat4x4(&leftCylRitem->TexTransform, brickTexTransform);
@@ -1429,7 +1446,7 @@ void GameApp::BuildRenderItems()
 
 	// draw buildings
 	auto rightBuildingRitem = std::make_unique<RenderItem>();
-	XMStoreFloat4x4(&rightBuildingRitem->World, XMMatrixScaling(1.5f, 1.5f, 1.5f)*XMMatrixTranslation(8.0f, 7.0f, 0.0f));
+	XMStoreFloat4x4(&rightBuildingRitem->World, XMMatrixScaling(1.5f, 1.5f, 1.5f) * XMMatrixTranslation(8.0f, 7.0f, 0.0f));
 	rightBuildingRitem->TexTransform = MathHelper::Identity4x4();
 	rightBuildingRitem->ObjCBIndex = objCBIndex++;
 	rightBuildingRitem->Mat = mMaterials["bricks0"].get();
@@ -1442,7 +1459,7 @@ void GameApp::BuildRenderItems()
 
 
 	auto leftBuildingRitem = std::make_unique<RenderItem>();
-	XMStoreFloat4x4(&leftBuildingRitem->World, XMMatrixScaling(1.5f, 1.5f, 1.5f)*XMMatrixTranslation(-8.0f, 7.0f, 0.0f));
+	XMStoreFloat4x4(&leftBuildingRitem->World, XMMatrixScaling(1.5f, 1.5f, 1.5f) * XMMatrixTranslation(-8.0f, 7.0f, 0.0f));
 	leftBuildingRitem->TexTransform = MathHelper::Identity4x4();
 	leftBuildingRitem->ObjCBIndex = objCBIndex++;
 	leftBuildingRitem->Mat = mMaterials["bricks0"].get();
@@ -1454,13 +1471,13 @@ void GameApp::BuildRenderItems()
 	mAllRitems.push_back(std::move(leftBuildingRitem));
 
 
+	// position splashscreen
 	auto menuRitem = std::make_unique<RenderItem>();
 	menuRitem->World = MathHelper::Identity4x4();
-	XMStoreFloat4x4(&menuRitem->World, XMMatrixScaling(1.5f, 1.5f, 1.5f) * XMMatrixTranslation(0.0f, 15.0f, 0.0f) * XMMatrixRotationZ(1.57f)* XMMatrixRotationY(-1.57f));
+	XMStoreFloat4x4(&menuRitem->World, XMMatrixScaling(1.5f, 1.5f, 1.5f) * XMMatrixTranslation(0.0f, 30.0f, 0.0f) * XMMatrixRotationZ(1.57f) * XMMatrixRotationY(-1.57f));
 	menuRitem->TexTransform = MathHelper::Identity4x4();
 	XMStoreFloat4x4(&menuRitem->TexTransform, XMMatrixScaling(1.0f, 1.0f, 1.0f) * XMMatrixRotationZ(-1.57f));
 	menuRitem->ObjCBIndex = objCBIndex++;
-	// menuRitem->Mat = mMaterials["splashscreenMat"].get();
 	menuRitem->Mat = mMaterials["splashscreenMat"].get();
 	menuRitem->Geo = mGeometries["shapeGeo"].get();
 	menuRitem->PrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
@@ -1469,7 +1486,7 @@ void GameApp::BuildRenderItems()
 	menuRitem->BaseVertexLocation = menuRitem->Geo->DrawArgs["menu"].BaseVertexLocation;
 	mAllRitems.push_back(std::move(menuRitem));
 
-	
+
 
 	// All the render items are opaque.
 	for (auto& e : mAllRitems)
@@ -1496,21 +1513,21 @@ void GameApp::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, const std::vec
 		CD3DX12_GPU_DESCRIPTOR_HANDLE tex(mSrvDescriptorHeap->GetGPUDescriptorHandleForHeapStart());
 		tex.Offset(ri->Mat->DiffuseSrvHeapIndex, mCbvSrvDescriptorSize);
 
-		D3D12_GPU_VIRTUAL_ADDRESS objCBAddress = objectCB->GetGPUVirtualAddress() + ri->ObjCBIndex*objCBByteSize;
-		D3D12_GPU_VIRTUAL_ADDRESS matCBAddress = matCB->GetGPUVirtualAddress() + ri->Mat->MatCBIndex*matCBByteSize;
+		D3D12_GPU_VIRTUAL_ADDRESS objCBAddress = objectCB->GetGPUVirtualAddress() + ri->ObjCBIndex * objCBByteSize;
+		D3D12_GPU_VIRTUAL_ADDRESS matCBAddress = matCB->GetGPUVirtualAddress() + ri->Mat->MatCBIndex * matCBByteSize;
 
 		cmdList->SetGraphicsRootDescriptorTable(0, tex);
 		cmdList->SetGraphicsRootConstantBufferView(1, objCBAddress);
 		cmdList->SetGraphicsRootConstantBufferView(3, matCBAddress);
 
-	//	cmdList->SetGraphicsRootConstantBufferView(0, objCBAddress);
-	//	cmdList->SetGraphicsRootConstantBufferView(1, matCBAddress);
+		//	cmdList->SetGraphicsRootConstantBufferView(0, objCBAddress);
+		//	cmdList->SetGraphicsRootConstantBufferView(1, matCBAddress);
 
-		// Offset to the CBV in the descriptor heap for this object and for this frame resource.
-		// UINT cbvIndex = mCurrFrameResourceIndex*(UINT)mOpaqueRitems.size() + ri->ObjCBIndex;
-		// auto cbvHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(mCbvHeap->GetGPUDescriptorHandleForHeapStart());
-		// cbvHandle.Offset(cbvIndex, mCbvSrvUavDescriptorSize);
-		// cmdList->SetGraphicsRootDescriptorTable(0, cbvHandle);
+			// Offset to the CBV in the descriptor heap for this object and for this frame resource.
+			// UINT cbvIndex = mCurrFrameResourceIndex*(UINT)mOpaqueRitems.size() + ri->ObjCBIndex;
+			// auto cbvHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(mCbvHeap->GetGPUDescriptorHandleForHeapStart());
+			// cbvHandle.Offset(cbvIndex, mCbvSrvUavDescriptorSize);
+			// cmdList->SetGraphicsRootDescriptorTable(0, cbvHandle);
 
 		cmdList->DrawIndexedInstanced(ri->IndexCount, 1, ri->StartIndexLocation, ri->BaseVertexLocation, 0);
 	}

@@ -8,6 +8,7 @@
 //
 //***************************************************************************************
 
+#define WIN32_LEAN_AND_MEAN		// make fast as possible
 
 // game states - tells you what status the game is at
 #define GAME_STATE_INIT			0
